@@ -1,17 +1,21 @@
 module Lita
   module Handlers
     class OnewheelTireSize < Handler
-      config :app_id
-      config :api_uri
-
       route(/^tire\s+(.*)/i, :handle_tire_size, command: true)
       route(/^tiresize\s+(.*)/i, :handle_tire_size, command: true)
 
       def handle_tire_size(response)
         size = response.matches[0][0]
-        # parse size
-        # '245/40R17'
-        puts get_diameter(size)
+
+        size.match(/(\d+[\/ ]\d+\s*R*\d+)\s+litaa(\d+[\/ ]\d+\s*R*\d+)/) do |m|
+          puts m.captures.inspect
+          dia1 = get_diameter(m.captures[0])
+          dia2 = get_diameter(m.captures[1])
+          response.reply "#{m.captures[0]} is #{dia1}\", #{m.captures[1]} is #{dia2}\", a difference of #{(dia1 - dia2).abs}"
+          return
+        end
+
+        response.reply "diameter for #{size} is #{get_diameter(size)} inches"
       end
 
       def get_diameter(size)
