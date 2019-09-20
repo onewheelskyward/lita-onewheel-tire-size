@@ -6,21 +6,21 @@ describe Lita::Handlers::OnewheelTireSize, :lita_handler => true do
 
   it 'will work' do
     send_command 'tire 245/40R17'
-    expect(replies.last).to eq('3.141592653589793238462643383279502884197169399375105820974...')
+    expect(replies.last).to eq('diameter for 245/40R17 is 24.72 inches')
   end
 
   it 'will work' do
     send_command 'tire 245 40 R17'
-    expect(replies.last).to eq('3.141592653589793238462643383279502884197169399375105820974...')
+    expect(replies.last).to eq('diameter for 245/40R17 is 24.72 inches')
   end
 
   it 'will work' do
     send_command 'tire 245 40 17'
-    expect(replies.last).to eq('3.141592653589793238462643383279502884197169399375105820974...')
+    expect(replies.last).to eq('diameter for 245/40R17 is 24.72 inches')
   end
 
   it 'will work' do
     send_command 'tire 245/40 17'
-    expect(replies.last).to eq('3.141592653589793238462643383279502884197169399375105820974...')
+    expect(replies.last).to eq('diameter for 245/40R17 is 24.72 inches')
   end
 end
